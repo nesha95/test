@@ -37,5 +37,9 @@ public class ContryController {
 
 			return new ResponseEntity<>(country, HttpStatus.OK);
 		}
+		
+		public void getTest() {
+			
+		}
 	
 }
