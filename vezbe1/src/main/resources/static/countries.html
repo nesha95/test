@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="scripts/jquery-3.2.1.min.js"></script>
+<script src="scripts/functions.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheets/design.css">
+<link rel="stylesheet" type="text/css"
+	href="stylesheets/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Države</title>
+<script>
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "http://localhost:8080/api/countries/getCountries"
+				}).then(
+						function(data) {
+							for (i = 0; i < data.length; i++) {
+								newRow = "<tr><td class=\"code\">" + data[i].code + "</td>"
+										+ "<td class=\"name\">" + data[i].name + "</td>"
+										+ "<td class=\"idCell\">" + data[i].id
+										+ "</td>"
+								$("#dataTable").append(newRow)
+							}
+						});
+			});
+
+	$(document).on("click", 'tr', function(event) {
+		highlightRow(this)
+	});
+</script>
+
+
+</head>
+<body>
+	<div class="formContainer">
+			<ul>
+				<li><a href="#" id="refresh"><img src="images/refresh.gif" /></a></li>
+				<li><a href="#" id="help"><img src="images/help.gif" /></a></li>
+				<li class="group-start"><a id="first"><img src="images/first.gif" /></a></li>
+				<li><a id="prev"><img src="images/prev.gif" /></a></li>
+				<li><a id="next"><img src="images/next.gif" /></a></li>
+				<li><a id="last"><img src="images/last.gif" /></a></li>
+				<li class="group-start"><a id="add"><img src="images/add.gif" /></a></li>
+				<li><a id="remove"><img src="images/remove.gif" /></a></li>
+				<li class="group-start"><a href="#" id="nextform"><img src="images/nextform.gif" /></a></li>
+			</ul>
+
+		<h1>Države</h1>
+		<table id="dataTable" class="table">
+			<tr class="header">
+				<th>Oznaka</th>
+				<th>Naziv</th>
+			</tr>
+		</table>
+
+		<div class="panel">
+			<p>
+			<form>
+				<input type="hidden" name="id" id="id" />
+				<p>
+					<label for="oznaka">Oznaka</label> <input type="text" name="oznaka"
+						id="oznaka" />
+				</p>
+				<p>
+					<label for="naziv">Naziv</label> <input type="text" name="naziv"
+						id="naziv" />
+				</p>
+				<div id="formActions">
+					<input type="submit" value="Potvrda" style="margin-left: 6em" /> <a
+						href="#" style="margin-left: 1em">Rollback</a>
+				</div>
+			</form>
+			</p>
+		</div>
+</body>
+</html>
